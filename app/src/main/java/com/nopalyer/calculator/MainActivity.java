@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.faendir.rhino_android.RhinoAndroidHelper;
@@ -17,8 +19,9 @@ import org.mozilla.javascript.ast.Scope;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPercent,btnPlus,btnMinus,btnMultiply,btnDivision,btnEqual,btnClear,btnDot,btnBracket;
+    Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPercent,btnPlus,btnMinus,btnMultiply,btnDivision,btnEqual,btnClear,btnDot;
     TextView tvInput,tvOutput;
+    ImageButton back;
     String process;
     boolean checkBracket = false;
 
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
         btnDot = findViewById(R.id.btnDot);
         btnPercent = findViewById(R.id.btnPercent);
-        btnBracket = findViewById(R.id.btnBracket);
+        back = findViewById(R.id.back);
 
         tvInput = findViewById(R.id.tvInput);
         tvOutput = findViewById(R.id.tvOutput);
@@ -58,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 tvInput.setText("");
                 tvOutput.setText("");
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int inputLength = tvInput.getText().length();
+                if (inputLength != 0) {
+                    String input = process.substring(0, process.length() - 1);
+                    process = input;
+                    tvInput.setText(process);
+                }
             }
         });
 
@@ -199,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnBracket.setOnClickListener(new View.OnClickListener() {
+        /*btnBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -214,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
         btnEqual.setOnClickListener(new View.OnClickListener() {
             @Override
